@@ -68,10 +68,10 @@ function calc() {
 }
 
 function calculateWuXing(birthYear: number, birthMonth: number, birthDay: number, birthHour: number) {
-    // 十干
-    var gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
-    // 十二支
-    var zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+    // // 十干
+    // var gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+    // // 十二支
+    // var zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
     // 五行属性
     var wuXing = ["木", "火", "土", "金", "水"];
 
@@ -124,8 +124,8 @@ console.log(result);
 export default function C() {
     return (
         <div class='h-100vh g grid-rows-[1fr_auto] max-w600px mx-auto xbg-gray1 '>
-            <div class='pt60px'>
-                <div class='ml75px text-15px c-#ccc mb2'>Birthday</div>
+            <div class='pt50px'>
+                <div class='ml75px text-15px c-#ccc mb1'>Birthday</div>
                 <div class='g aic grid-cols-[75px_auto_55px] mb50px relative'>
                     <Avatar />
                     <BirthtimeSelector />
