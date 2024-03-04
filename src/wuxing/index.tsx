@@ -13,7 +13,7 @@ import landImg from './assets/land.pic.jpg'
 
 const state = createMutable({
     isLoading: false,
-    gender: '',
+    gender: 'male',
     birthTime: '',
     result: ''
 })
