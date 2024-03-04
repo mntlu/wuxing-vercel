@@ -9,8 +9,6 @@ import fireImg from './assets/fire.pic.jpg'
 import landImg from './assets/land.pic.jpg'
 // import downImg from './assets/down@2x.png'
 
-
-
 const state = createMutable({
     isLoading: false,
     gender: 'male',
@@ -32,7 +30,6 @@ const resultObj = () => ({
 })[state.result]
 
 function onSelectGender() {
-    // state.gender = e.target.value
     if (state.gender === 'male') {
         state.gender = 'female'
     } else {
@@ -108,23 +105,7 @@ function calculateWuXing(birthYear: number, birthMonth: number, birthDay: number
         dayWuXing,
         hourWuXing,
     }
-    // return {
-    //     year: yearWuXing,
-    //     month: monthWuXing,
-    //     day: dayWuXing,
-    //     hour: hourWuXing
-    // };
 }
-
-// 示例用法
-var birthYear = 1990;
-var birthMonth = 5;
-var birthDay = 15;
-var birthHour = 8;
-
-var result = calculateWuXing(birthYear, birthMonth, birthDay, birthHour);
-console.log(result);
-
 
 export default function C() {
     return (
@@ -197,7 +178,6 @@ function LoadingIcon() {
                 <svg class='w16px xhidden ' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12,23a9.63,9.63,0,0,1-8-9.5,9.51,9.51,0,0,1,6.79-9.1A1.66,1.66,0,0,0,12,2.81h0a1.67,1.67,0,0,0-1.94-1.64A11,11,0,0,0,12,23Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" /></path></svg>
             </div>
         </Show>
-        // <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle30" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle3b.end" dur="0.2s" values="1;13" /><animate id="svgSpinnersBlocksShuffle31" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle38.end" dur="0.2s" values="1;13" /><animate id="svgSpinnersBlocksShuffle32" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle39.end" dur="0.2s" values="13;1" /><animate id="svgSpinnersBlocksShuffle33" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle3a.end" dur="0.2s" values="13;1" /></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle34" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle30.end" dur="0.2s" values="13;1" /><animate id="svgSpinnersBlocksShuffle35" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle31.end" dur="0.2s" values="1;13" /><animate id="svgSpinnersBlocksShuffle36" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle32.end" dur="0.2s" values="1;13" /><animate id="svgSpinnersBlocksShuffle37" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle33.end" dur="0.2s" values="13;1" /></rect><rect width="10" height="10" x="13" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle38" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle34.end" dur="0.2s" values="13;1" /><animate id="svgSpinnersBlocksShuffle39" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle35.end" dur="0.2s" values="13;1" /><animate id="svgSpinnersBlocksShuffle3a" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle36.end" dur="0.2s" values="1;13" /><animate id="svgSpinnersBlocksShuffle3b" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle37.end" dur="0.2s" values="1;13" /></rect></svg>
     )
 }
 
