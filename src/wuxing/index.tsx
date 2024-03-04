@@ -31,8 +31,13 @@ const resultObj = () => ({
     '土': { text: 'Land', img: landImg },
 })[state.result]
 
-function onSelectGender(e: any) {
-    state.gender = e.target.value
+function onSelectGender() {
+    // state.gender = e.target.value
+    if (state.gender === 'male') {
+        state.gender = 'female'
+    } else {
+        state.gender = 'male'
+    }
 }
 function onSelectBirthtime(e: any) {
     state.birthTime = e.target.value
@@ -146,11 +151,11 @@ export default function C() {
 
 function Avatar() {
     return (
-        <div class='rcc relative h40px'>
-            <select onchange={onSelectGender} class='bg-gray3 op.1 absolute left-0 right-0 top-0 bottom-0'>
+        <div class='rcc relative h40px' onclick={onSelectGender}>
+            {/* <select onchange={onSelectGender} class='bg-gray3 op.1 absolute left-0 right-0 top-0 bottom-0'>
                 <option value="male">male</option>
                 <option value="female">female</option>
-            </select>
+            </select> */}
             <div class='xring relative pointer-events-none w40px h40px rcc'>
                 <Show when={genderImg()} fallback={'gender?'}>
                     <img class='block w40px h40px' src={genderImg()} alt="" />
