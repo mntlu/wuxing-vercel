@@ -82,6 +82,7 @@ function calc() {
             e5: lun.char8.day.stem.e5.name,
             width1: state.width1,
             width2: window.innerWidth,
+            hislen: window.history.length,
         }
         state.result = lun.char8.day.stem.e5.name
         state.isLoading = false
