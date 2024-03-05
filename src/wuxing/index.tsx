@@ -27,11 +27,11 @@ const genderImg = () => ({
 
 const resultObj = () => ({
     '': { text: '', img: '' },
-    '金': { text: 'Metal', img: goldImg },
-    '木': { text: 'Earth', img: woodImg },
+    '金': { text: 'Gold', img: goldImg },
+    '木': { text: 'Wood', img: woodImg },
     '水': { text: 'Water', img: waterImg },
     '火': { text: 'Fire', img: fireImg },
-    '土': { text: 'Land', img: landImg },
+    '土': { text: 'Earth', img: landImg },
 })[state.result]
 
 function onSelectGender() {
