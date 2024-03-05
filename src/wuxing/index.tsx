@@ -3,6 +3,7 @@ import { createMutable } from "solid-js/store"
 import lunisolar from 'lunisolar'
 import maleImg from './assets/male@2x.png'
 import femaleImg from './assets/female@2x.png'
+import otherImg from './assets/other@2x.png'
 import goldImg from './assets/gold.pic.jpg'
 import woodImg from './assets/wood.pic.jpg'
 import waterImg from './assets/water.pic.jpg'
@@ -15,11 +16,13 @@ const state = createMutable({
     gender: 'male',
     birthTime: '',
     lunli: {},
-    result: ''
+    result: '',
+    isShowLunli: false,
 })
 const genderImg = () => ({
     male: maleImg,
     female: femaleImg,
+    other: otherImg,
 })[state.gender]
 
 const resultObj = () => ({
@@ -34,6 +37,8 @@ const resultObj = () => ({
 function onSelectGender() {
     if (state.gender === 'male') {
         state.gender = 'female'
+    } else if (state.gender === 'female') {
+        state.gender = 'other'
     } else {
         state.gender = 'male'
     }
@@ -68,11 +73,12 @@ function calc() {
         // state.result = hourWuXing
 
         const lun = lunisolar(new Date(state.birthTime))
-         state.lunli = {
+        state.lunli = {
             luna: lun.lunar,
             char8: lun.char8.toString(),
             e5: lun.char8.day.stem.e5.name,
-         }
+        }
+        state.result = lun.char8.day.stem.e5.name
         state.isLoading = false
     }, rndTime)
 }
@@ -81,7 +87,7 @@ export default function C() {
     return (
         <div class='h-100vh g grid-rows-[1fr_auto] max-w600px mx-auto xbg-gray1 '>
             <div class='pt50px'>
-                <div class='ml75px text-15px c-#ccc mb1'>Birthday</div>
+                <div class='ml75px text-15px c-#ccc mb1' ondblclick={() => state.isShowLunli = !state.isShowLunli}>Birthday</div>
                 <div class='g aic grid-cols-[75px_auto_55px] mb50px relative'>
                     <Avatar />
                     <BirthtimeSelector />
@@ -91,9 +97,11 @@ export default function C() {
                     <div class='text-17px'>Check Five Elements</div>
                 </div>
 
-                <pre>
-                    {JSON.stringify(state.lunli, null, 2)}
-                </pre>
+                <Show when={state.isShowLunli}>
+                    <pre>
+                        {JSON.stringify(state.lunli, null, 2)}
+                    </pre>
+                </Show>
 
                 <div class='rcc mb4 c-main text-24px '>{resultObj()?.text ?? ' '}</div>
                 <div class='rcc mb4 c-#ccc text-13px '>Your element</div>
