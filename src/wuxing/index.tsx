@@ -71,7 +71,7 @@ function calc() {
          state.lunli = {
             luna: lun.lunar,
             char8: lun.char8.toString(),
-            // elm: lun.toString(),
+            e5: lun.char8.day.stem.e5.name,
          }
         state.isLoading = false
     }, rndTime)
