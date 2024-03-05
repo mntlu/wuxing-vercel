@@ -122,7 +122,7 @@ function Avatar() {
             <div class='xring relative pointer-events-none w40px h40px ccc'>
                 <Show when={genderImg()} fallback={'gender?'}>
                     <img class='block w40px h40px' src={genderImg()} alt="" />
-                    <div class='text-12px c-#ccc'>{state.gender}</div>
+                    <div class='text-13px c-#ccc'>{state.gender}</div>
                 </Show>
             </div>
         </div>
