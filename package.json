@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ionic/core": "^7.7.3",
     "lunisolar": "^2.4.0",
     "solid-js": "^1.8.15"
   },

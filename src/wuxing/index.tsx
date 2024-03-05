@@ -1,4 +1,4 @@
-import { For, Show, onMount } from "solid-js"
+import { For, Show, createEffect, onMount } from "solid-js"
 import { createMutable } from "solid-js/store"
 import lunisolar from 'lunisolar'
 import maleImg from './assets/male@2x.png'
@@ -18,6 +18,8 @@ const state = createMutable({
     lunli: {},
     result: '',
     isShowLunli: false,
+    isShowDatetime: false,
+    width1: window.innerWidth,
 })
 const genderImg = () => ({
     male: maleImg,
@@ -43,9 +45,9 @@ function onSelectGender() {
         state.gender = 'male'
     }
 }
-function onSelectBirthtime(e: any) {
-    state.birthTime = e.target.value
-}
+// function onSelectBirthtime(e: any) {
+//     state.birthTime = e.target.value
+// }
 
 function calc() {
     if (!state.gender) {
@@ -77,6 +79,8 @@ function calc() {
             luna: lun.lunar,
             char8: lun.char8.toString(),
             e5: lun.char8.day.stem.e5.name,
+            width1: state.width1,
+            width2: window.innerWidth,
         }
         state.result = lun.char8.day.stem.e5.name
         state.isLoading = false
@@ -88,9 +92,13 @@ export default function C() {
         <div class='h-100vh g grid-rows-[1fr_auto] max-w600px mx-auto xbg-gray1 '>
             <div class='pt50px'>
                 <div class='ml75px text-15px c-#ccc mb1' ondblclick={() => state.isShowLunli = !state.isShowLunli}>Birthday</div>
-                <div class='g aic grid-cols-[75px_auto_55px] mb50px relative'>
+                {/* <div class='g aic grid-cols-[75px_auto_55px] mb50px relative'>
                     <Avatar />
                     <BirthtimeSelector />
+                </div> */}
+                <div class='g aic grid-cols-[75px_auto_55px] mb50px relative'>
+                    <Avatar />
+                    <BirthtimeSelector2 />
                 </div>
                 <div class='ml75px mr55px mb50px rounded h50px bg-main c-white hover:op80 focus:op90 cursor-pointer rcc' onclick={calc}>
                     <LoadingIcon />
@@ -105,9 +113,11 @@ export default function C() {
 
                 <div class='rcc mb4 c-main text-24px '>{resultObj()?.text ?? ' '}</div>
                 <div class='rcc mb4 c-#ccc text-13px '>Your element</div>
+
             </div>
             <img class={resultObj()?.img ? 'block' : 'hidden'} src={resultObj()?.img} alt="" />
             <Imgpreload />
+
         </div>
     )
 }
@@ -129,31 +139,92 @@ function Avatar() {
     )
 }
 
-function BirthtimeSelector() {
-    return (
-        <div class='r aic relative b-b-1 b-b-main b-b-solid py4'>
+// function BirthtimeSelector() {
+//     return (
+//         <div class='r aic relative b-b-1 b-b-main b-b-solid py4'>
 
-            <div class='r xbg-blue3 absolute left-0 right-0 top-0 bottom-0'>
-                <For each={[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]} >
-                    {() => <input
-                        class='flex-auto xbg-gray3 op.1  hover:bg-none focus:bg-none active:bg-none outline-none border-0 appearance-none'
-                        type="datetime-local"
-                        value={state.birthTime}
-                        oninput={onSelectBirthtime}
-                    />}
-                </For>
+//             <div class='r xbg-blue3 absolute left-0 right-0 top-0 bottom-0'>
+//                 <For each={[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]} >
+//                     {() => <input
+//                         class='flex-auto xbg-gray3 op.1  hover:bg-none focus:bg-none active:bg-none outline-none border-0 appearance-none'
+//                         type="datetime-local"
+//                         value={state.birthTime}
+//                         oninput={onSelectBirthtime}
+//                     />}
+//                 </For>
+//             </div>
+//             <input
+//                 class='flex-auto xbg-red2 relative text-18px c-main pointer-events-none xop50 outline-none border-0 appearance-none px0 tracking-[1px]'
+//                 type="text"
+//                 placeholder="birthday and time?"
+//                 value={state.birthTime}
+//             />
+//             {/* <img src={downImg} class='w14px absolute right-0' alt="" /> */}
+//         </div>
+//     )
+// }
+
+
+function BirthtimeSelector2() {
+    let ref;
+
+    return (
+        <div class='r aic relative b-b-1 b-b-main b-b-solid py4' >
+            <div class='tracking-[1px] rc' onclick={() => state.isShowDatetime = true}>
+                <Show when={!state.birthTime} fallback={<div class='text-18px c-main'>{state.birthTime}</div>}>
+                    <div class='c-[rgb(117,117,117)] text-18px'>birthday and time?</div>
+                </Show>
             </div>
-            <input
-                class='flex-auto xbg-red2 relative text-18px c-main pointer-events-none xop50 outline-none border-0 appearance-none px0 tracking-[1px]'
-                type="text"
-                placeholder="birthday and time?"
-                value={state.birthTime}
-            />
+            <Show when={state.isShowDatetime} >
+                <div class='absolute right-0 w0 h0 overflow-auto'>
+                    <div class='absolute w0 h0 overflow-hidden'>
+                       <ion-datetime-button datetime="datetime"></ion-datetime-button>
+                    </div>
+                    <ion-modal ref={ref => {
+                        ref.isOpen = true
+
+                        const enterAnimation = (baseEl) => {
+                            const root = baseEl.shadowRoot;
+
+                            const backdropAnimation = createAnimation()
+                                .addElement(root.querySelector('ion-backdrop'))
+                                .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+                            const wrapperAnimation = createAnimation()
+                                .addElement(root.querySelector('.modal-wrapper'))
+                                .keyframes([
+                                    { offset: 0, opacity: '0', transform: 'scale(0)' },
+                                    { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+                                ]);
+
+                            return createAnimation()
+                                .addElement(baseEl)
+                                .easing('ease-out')
+                                .duration(100)
+                                .addAnimation([backdropAnimation, wrapperAnimation]);
+                        };
+
+                        const leaveAnimation = (baseEl) => enterAnimation(baseEl).direction('reverse');
+
+                        ref.enterAnimation = enterAnimation;
+                        ref.leaveAnimation = leaveAnimation;
+                        ref.addEventListener('ionChange',e=>{
+                            state.birthTime = e.detail.value
+                        })
+
+                        ref.addEventListener('didDismiss', () => {
+                            state.isShowDatetime = false
+                        })
+                    }} >
+                        <ion-datetime id="datetime" attr:show-default-buttons="true"></ion-datetime>
+                    </ion-modal>
+                </div>
+            </Show>
+
             {/* <img src={downImg} class='w14px absolute right-0' alt="" /> */}
-        </div>
+        </div >
     )
 }
-
 function LoadingIcon() {
     return (
         <Show when={state.isLoading} >
