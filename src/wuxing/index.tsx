@@ -10,6 +10,7 @@ import waterImg from './assets/water.pic.jpg'
 import fireImg from './assets/fire.pic.jpg'
 import landImg from './assets/land.pic.jpg'
 // import downImg from './assets/down@2x.png'
+import arrowbackImg from './assets/back@2x.png'
 
 const state = createMutable({
     isLoading: false,
@@ -113,6 +114,12 @@ export default function C() {
 
                 <div class='rcc mb4 c-main text-24px '>{resultObj()?.text ?? ' '}</div>
                 <div class='rcc mb4 c-#ccc text-13px '>Your element</div>
+                <Show when={window.history.length} >
+                    <div class='rcc mb4' onclick={()=>history.back()}>
+                        <img src={arrowbackImg} class='w8px mr2' alt="" />
+                        <div class='c-main op80 text-15px'>Click here back to previous page</div>
+                    </div>
+                </Show>
 
             </div>
             <img class={resultObj()?.img ? 'block' : 'hidden'} src={resultObj()?.img} alt="" />
