@@ -114,7 +114,7 @@ export default function C() {
 
                 <div class='rcc mb4 c-main text-24px '>{resultObj()?.text ?? ' '}</div>
                 <div class='rcc mb4 c-#ccc text-13px '>Your element</div>
-                <Show when={window.history.length} >
+                <Show when={window.history.length>1} >
                     <div class='rcc mb4' onclick={()=>history.back()}>
                         <img src={arrowbackImg} class='w8px mr2' alt="" />
                         <div class='c-main op80 text-15px'>Click here back to previous page</div>
