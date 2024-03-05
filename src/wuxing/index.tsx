@@ -1,5 +1,6 @@
 import { For, Show, onMount } from "solid-js"
 import { createMutable } from "solid-js/store"
+import lunisolar from 'lunisolar'
 import maleImg from './assets/male@2x.png'
 import femaleImg from './assets/female@2x.png'
 import goldImg from './assets/gold.pic.jpg'
@@ -13,6 +14,7 @@ const state = createMutable({
     isLoading: false,
     gender: 'male',
     birthTime: '',
+    lunli: {},
     result: ''
 })
 const genderImg = () => ({
@@ -55,56 +57,24 @@ function calc() {
     setTimeout(() => {
         // state.result = ['gold', 'wood', 'water', 'fire', 'land'][Math.floor(Math.random() * 5)]
 
-        var datetime = new Date(state.birthTime);
-        var year = datetime.getFullYear();
-        var month = datetime.getMonth() + 1; // 月份从0开始，需要加1
-        var day = datetime.getDate();
-        var hour = datetime.getHours();
+        // var datetime = new Date(state.birthTime);
+        // var year = datetime.getFullYear();
+        // var month = datetime.getMonth() + 1; // 月份从0开始，需要加1
+        // var day = datetime.getDate();
+        // var hour = datetime.getHours();
 
-        const { hourWuXing } = calculateWuXing(year, month, day, hour)
-        console.log({ hourWuXing })
-        state.result = hourWuXing
+        // const { hourWuXing } = calculateWuXing(year, month, day, hour)
+        // console.log({ hourWuXing })
+        // state.result = hourWuXing
 
+        const lun = lunisolar(new Date(state.birthTime))
+         state.lunli = {
+            luna: lun.lunar,
+            char8: lun.char8.toString(),
+            // elm: lun.toString(),
+         }
         state.isLoading = false
     }, rndTime)
-}
-
-function calculateWuXing(birthYear: number, birthMonth: number, birthDay: number, birthHour: number) {
-    // // 十干
-    // var gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
-    // // 十二支
-    // var zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
-    // 五行属性
-    var wuXing = ["木", "火", "土", "金", "水"];
-
-    // 计算年份的五行属性
-    var yearGanIndex = (birthYear - 4) % 10; // 计算年份对应的十干索引
-    var yearZhiIndex = (birthYear - 4) % 12; // 计算年份对应的十二支索引
-    var yearWuXingIndex = (yearGanIndex % 5) * 2 + (yearZhiIndex % 5) % 2; // 计算年份的五行属性索引
-    var yearWuXing = wuXing[yearWuXingIndex]; // 获取年份的五行属性
-
-    // 计算出生月份的五行属性
-    var monthZhiIndex = (birthMonth - 1) % 12; // 计算月份对应的十二支索引
-    var monthWuXingIndex = (yearGanIndex % 5) * 2 + (monthZhiIndex % 5) % 2; // 计算月份的五行属性索引
-    var monthWuXing = wuXing[monthWuXingIndex]; // 获取月份的五行属性
-
-    // 计算出生日期的五行属性
-    var dayZhiIndex = (birthDay - 1) % 12; // 计算日期对应的十二支索引
-    var dayWuXingIndex = (yearGanIndex % 5) * 2 + (dayZhiIndex % 5) % 2; // 计算日期的五行属性索引
-    var dayWuXing = wuXing[dayWuXingIndex]; // 获取日期的五行属性
-
-    // 计算出生时辰的五行属性
-    var hourZhiIndex = (birthHour - 1) % 12; // 计算时辰对应的十二支索引
-    var hourWuXingIndex = (yearGanIndex % 5) * 2 + (hourZhiIndex % 5) % 2; // 计算时辰的五行属性索引
-    var hourWuXing = wuXing[hourWuXingIndex]; // 获取时辰的五行属性
-
-    // 返回结果
-    return {
-        yearWuXing,
-        monthWuXing,
-        dayWuXing,
-        hourWuXing,
-    }
 }
 
 export default function C() {
@@ -120,6 +90,10 @@ export default function C() {
                     <LoadingIcon />
                     <div class='text-17px'>Check Five Elements</div>
                 </div>
+
+                <pre>
+                    {JSON.stringify(state.lunli, null, 2)}
+                </pre>
 
                 <div class='rcc mb4 c-main text-24px '>{resultObj()?.text ?? ' '}</div>
                 <div class='rcc mb4 c-#ccc text-13px '>Your element</div>

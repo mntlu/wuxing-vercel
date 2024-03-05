@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  lunisolar:
+    specifier: ^2.4.0
+    version: 2.4.0
   solid-js:
     specifier: ^1.8.15
     version: 1.8.15
@@ -1409,6 +1412,10 @@ packages:
     dependencies:
       yallist: 3.1.1
     dev: true
+
+  /lunisolar@2.4.0:
+    resolution: {integrity: sha512-F1j0iNRztO4Ozh3w0h8PUj0DhDwbfqMIhaj58ehwBNCZt7SSpZ7Dzqs46O21EqSlm7TfJRj7mWdkG2jlFtWkDA==}
+    dev: false
 
   /magic-string@0.30.8:
     resolution: {integrity: sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ==}
