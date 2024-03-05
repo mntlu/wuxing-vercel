@@ -28,7 +28,7 @@ const genderImg = () => ({
 const resultObj = () => ({
     '': { text: '', img: '' },
     '金': { text: 'Metal', img: goldImg },
-    '木': { text: 'Wood', img: woodImg },
+    '木': { text: 'Earth', img: woodImg },
     '水': { text: 'Water', img: waterImg },
     '火': { text: 'Fire', img: fireImg },
     '土': { text: 'Land', img: landImg },
@@ -119,9 +119,10 @@ function Avatar() {
                 <option value="male">male</option>
                 <option value="female">female</option>
             </select> */}
-            <div class='xring relative pointer-events-none w40px h40px rcc'>
+            <div class='xring relative pointer-events-none w40px h40px ccc'>
                 <Show when={genderImg()} fallback={'gender?'}>
                     <img class='block w40px h40px' src={genderImg()} alt="" />
+                    <div class='text-12px c-#ccc'>{state.gender}</div>
                 </Show>
             </div>
         </div>
