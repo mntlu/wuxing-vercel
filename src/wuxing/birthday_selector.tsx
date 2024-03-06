@@ -45,7 +45,7 @@ export default function BirthdaySelector({state}){
                         ref.addEventListener('ionModalWillPresent',()=>{
                             if(window.innerWidth<330){
                                 document.querySelector('#datetime')?.shadowRoot.querySelectorAll('.datetime-header, .wheel-order-year-first, .datetime-footer').forEach(e => {
-                                    console.log(e)
+                                    // console.log(e)
                                     e.style.width = window.innerWidth + 'px'
                                 })
                             }
