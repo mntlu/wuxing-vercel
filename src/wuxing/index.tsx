@@ -84,7 +84,7 @@ function calc() {
     }, rndTime)
 }
 function toggleShowDbg() {
-    state.isShowDbg = !state.isShowDbg
+    // state.isShowDbg = !state.isShowDbg
 }
 
 export default function C() {
