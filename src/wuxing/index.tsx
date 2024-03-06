@@ -143,7 +143,7 @@ function BirthSelector() {
     const showBirthtime = () => { state.isShowTimeSelector = true }
 
     const BirthdayPh = <div class='c-[rgb(117,117,117)] ' onclick={showBirthday}>choose birth time?</div>
-    const BirthtimePh = <div class='c-[#3880FF] ' onclick={showBirthtime}>birth time?</div>
+    const BirthtimePh = <div class='c-[#3880FF] ' onclick={showBirthtime}>time?</div>
 
     return (
         <div class='r aic relative b-b-1 b-b-main b-b-solid py4 text-18px c-main ' >
