@@ -39,9 +39,17 @@ export default function BirthdaySelector({state}){
                         ref.addEventListener('ionChange',e=>{
                             state.birthday = e.detail.value.split('T')[0]
                         })
-
                         ref.addEventListener('didDismiss', () => {
                             state.isShowDaySelector = false
+                        })
+                        ref.addEventListener('ionModalWillPresent',()=>{
+                            debugger
+                            if(window.innerWidth<330){
+                                document.querySelector('#datetime')?.shadowRoot.querySelectorAll('.datetime-header, .wheel-order-year-first, .datetime-footer').forEach(e => {
+                                    console.log(e)
+                                    e.style.width = window.innerWidth + 'px'
+                                })
+                            }
                         })
                     }} >
                         <ion-datetime 
