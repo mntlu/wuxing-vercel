@@ -1,14 +1,17 @@
 import { Show } from "solid-js";
 
 export default function BirthtimeSelector({state}){
-    let ref;
+    
+    let mRef;
     return (
+        <>
         <Show when={state.isShowTimeSelector} >
                 <div class='absolute right-0 w0 h0 overflow-auto'>
                     <div class='absolute w0 h0 overflow-hidden'>
                        <ion-datetime-button datetime="btime"></ion-datetime-button>
                     </div>
                     <ion-modal ref={ref => {
+                        mRef = ref
                         ref.isOpen = true
 
                         const enterAnimation = (baseEl) => {
@@ -42,6 +45,7 @@ export default function BirthtimeSelector({state}){
 
                         ref.addEventListener('didDismiss', () => {
                             state.isShowTimeSelector = false
+                            // hide()
                         })
                     }} >
                         <ion-datetime 
@@ -50,10 +54,18 @@ export default function BirthtimeSelector({state}){
                             attr:presentation="time" 
                             attr:prefer-wheel="true"
                             >
-                            {<span attr:slot="title">Birth time</span>}
+                            {<div attr:slot="title" class='rc jcb'>
+                                <div class='mr-30px'>Birth time</div>
+                                <div class='text-14px c-[#3880FF]' onclick={()=>{
+                                    state.isShowTimeSelector = false
+                                    state.birthtime = '--:--'
+                                    mRef.dismiss()
+                                }}>I don’t know</div>
+                                </div>}
                         </ion-datetime>
                     </ion-modal>
                 </div>
             </Show>
+            </>
     )
 }

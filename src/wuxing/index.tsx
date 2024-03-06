@@ -26,7 +26,7 @@ const state = createMutable({
     width1: window.innerWidth,
 })
 
-const birthdate = () => state.birthday + 'T' + state.birthtime + ':00'
+const birthdate = () => state.birthday + 'T' + (state.birthtime === '--:--' ? '00:00' : state.birthtime) + ':00'
 
 const genderImg = () => ({
     male: maleImg,
@@ -158,7 +158,9 @@ function BirthSelector() {
                 </Show>
             </div>
             <BirthdaySelector state={state} />
-            <BirthtimeSelector state={state} />
+            <Show when={state.isShowTimeSelector}>
+                <BirthtimeSelector state={state} />
+            </Show>
         </div >
     )
 }
