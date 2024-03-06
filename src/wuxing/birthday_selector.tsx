@@ -43,7 +43,6 @@ export default function BirthdaySelector({state}){
                             state.isShowDaySelector = false
                         })
                         ref.addEventListener('ionModalWillPresent',()=>{
-                            debugger
                             if(window.innerWidth<330){
                                 document.querySelector('#datetime')?.shadowRoot.querySelectorAll('.datetime-header, .wheel-order-year-first, .datetime-footer').forEach(e => {
                                     console.log(e)
