@@ -50,7 +50,7 @@ export default function BirthdaySelector({state}){
                         attr:presentation="date" 
                         attr:prefer-wheel="true"
                         >
-                            {<span attr:slot="title">Select birth day</span>}
+                            {<span attr:slot="title">Choose birth day</span>}
                         </ion-datetime>
                     </ion-modal>
                 </div>
